@@ -19,10 +19,6 @@ class Game:
         self.players.append(Player(name))
 
     def findPlayer(self, name: str):
-        print("looking for player with name", name)
-        # print length of players
-        print("players", len(self.players))
-        # loop through players
         foundPlayer = None
         for player in self.players:
             if player.name() == name:
@@ -42,23 +38,18 @@ class Game:
                 return
 
     def actOnPlayer(self) -> None:
-        print("Going to trigger pigeon attack")
-        print(len(self.players))
-        if len(self.players) == 0:
-            print("No players to act on")
-            return
-        player = random.choice(self.players)
+        # if len(self.players) == 0:
+        #     return
+        # player = random.choice(self.players)
         action = random.choice(self.actions)
         # player.changePoints(action.actionPoint)
         self.irc.privmsg(self.irc.config.channel,  action.act())
 
     def start(self):
-        print("dones something")
         # do interval for every 5 seconds
         RepeatedTimer(10, self.actOnPlayer)
 
     def attemptShoot(self, nick):
-        print("Attempting to shoot pigeon")
         player = self.findPlayer(nick)
         if player is None:
             print("Player not found")
@@ -66,11 +57,9 @@ class Game:
         print("Player found")
         shot = random.choice([True,False])
         if shot:
-            print("You hit the pigeon!")
             player.addPoints(10)
             return "You hit the pigeon!"
         else:
-            print("You missed the pigeon!")
             player.removePoints(10)
             return "You missed the pigeon!"
 
