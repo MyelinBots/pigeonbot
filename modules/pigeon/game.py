@@ -42,6 +42,10 @@ class Game:
                 return
 
     def actOnPlayer(self) -> None:
+        if self.active != None:
+            self.irc.privmsg(self.irc.config.channel, "The %s pigeon has made a clean escape" % self.active.type())
+            self.active = None
+            return
         # if len(self.players) == 0:
         #     return
         # player = random.choice(self.players)
