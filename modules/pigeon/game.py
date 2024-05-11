@@ -1,16 +1,20 @@
 from .actions import Action
 from .player import Player
 from .timer import RepeatedTimer
+from .pigeon import Pigeon, pigeons
 import random
 class Game:
     def __init__(self, irc):
         self.irc = irc
         self.players: [Player] = []
         self.actions: [Action] = [
-            Action("stole", ["tv", "wallet", "food"], "a pigeon %s your %s", 10),
-            Action("pooped", ["car", "table", "head"], "a pigeon %s on your %s", 10),
-            Action("landed", ["balcony", "head", "car", "house"], "a pigeon has %s on your %s", 10),
+            Action("stole", ["tv", "wallet", "food"], "a %s pigeon %s your %s", 10),
+            Action("pooped", ["car", "table", "head"], "a %s pigeon %s on your %s", 10),
+            Action("landed", ["balcony", "head", "car", "house"], "a %s pigeon has %s on your %s", 10),
         ]
+        self.active: Pigeon = None
+        self.pigeons: [Pigeon] = pigeons
+
 
     def addPlayer(self, name: str) -> None:
         for player in self.players:
@@ -41,23 +45,28 @@ class Game:
         # if len(self.players) == 0:
         #     return
         # player = random.choice(self.players)
+        pigeon = random.choice(self.pigeons)
         action = random.choice(self.actions)
         # player.changePoints(action.actionPoint)
-        self.irc.privmsg(self.irc.config.channel,  action.act())
+        self.active = pigeon
+        self.irc.privmsg(self.irc.config.channel,  action.act(pigeon.type()))
 
     def start(self):
         # do interval for every 5 seconds
         RepeatedTimer(10, self.actOnPlayer)
 
     def attemptShoot(self, nick):
+        if self.active == None:
+            return "There is no pigeon, what are you shooting at?"
         player = self.findPlayer(nick)
         if player is None:
             print("Player not found")
             return "You are not a player in the game"
         print("Player found")
-        shot = random.choice([True,False])
+        shot = random.random() < self.active.success() / 100
         if shot:
-            player.addPoints(10)
+            player.addPoints(self.active.points())
+            self.active = None
             return "You hit the pigeon!"
         else:
             player.removePoints(10)
