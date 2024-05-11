@@ -1,21 +1,30 @@
-startingPoints: int = 10000
+startingPoints: int = 0
 
 class Player:
     def __init__(self, name: str):
-        self.name = name
-        self.points = startingPoints
+        self._name = name
+        self._points = startingPoints
 
     def name(self):
-        return self.name
+        return self._name
 
     def points(self):
-        return self.points
+        return self._points
 
     def changePoints(self, points: int):
-        self.points += points
+        self._points += points
 
     def resetPoints(self):
-        self.points = startingPoints
+        self._points = startingPoints
+
+    def addPoints(self, points):
+        self._points += points
+
+    def removePoints(self, points):
+        self._points -= points
+        if self._points < 0:
+            self._points = 0
 
     def __str__(self):
-        return f"{self.name} has {self.points} points."
+        return f"{self._name} has {self._points} points."
+    

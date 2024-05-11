@@ -20,9 +20,9 @@ class Action:
     def format(self):
         return self.format
 
-    def act(self):
+    def act(self, name: str):
         # choose random item
         item = random.choice(self.items)
 
-        return self.format % (self.action, item)
+        return self.format % (name, self.action, item)
 
