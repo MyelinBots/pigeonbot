@@ -4,8 +4,9 @@ import random
 from .actions import Action
 from .player import Player
 from pyircsdk import Module
-
+from .commands import Commands
 from .timer import RepeatedTimer
+
 
 
 class PigeonModule(Module):
@@ -34,6 +35,15 @@ class PigeonModule(Module):
 
                 print("adding player", name)
                 self.game.addPlayer(name)
+
+        # for each Commands call function
+        commands = Commands(self.irc, self.game)
+        for attr_name in dir(commands):
+            # Get the attribute
+            attr = getattr(commands, attr_name)
+            # Check if the attribute is a method and call it
+            if callable(attr) and not attr_name.startswith('__'):
+                attr(message, command)
 
         if message.command == "PRIVMSG":
             if command.command == self.fantasy + self.command:
