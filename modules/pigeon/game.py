@@ -14,9 +14,9 @@ class Game:
         self.irc = irc
         self.players: [Player] = []
         self.actions: [Action] = [
-            Action("stole", ["tv", "wallet", "food"], "a %s pigeon %s your %s", 10),
-            Action("pooped", ["car", "table", "head"], "a %s pigeon %s on your %s", 10),
-            Action("landed", ["balcony", "head", "car", "house"], "a %s pigeon has %s on your %s", 10),
+            Action("stole", ["tv", "wallet", "food"], "A %s pigeon %s your %s", 10),
+            Action("pooped", ["car", "table", "head"], "A %s pigeon %s on your %s", 10),
+            Action("landed", ["balcony", "head", "car", "house"], "A %s pigeon has %s on your %s", 10),
         ]
         self.active: Pigeon = None
         self.pigeons: [Pigeon] = pigeons
