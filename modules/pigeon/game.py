@@ -18,6 +18,12 @@ class Game:
                 return
         self.players.append(Player(name))
 
+    def findPlayer(self, name: str):
+        for player in self.players:
+            if player.name() == name:
+                return player  
+
+
     def removePlayer(self, name: str) -> None:
         for player in self.players:
             if player.name == name:
@@ -39,4 +45,12 @@ class Game:
         print("dones something")
         # do interval for every 5 seconds
         RepeatedTimer(10, self.actOnPlayer)
+
+    def attemptShoot(self, nick):
+        player = self.findPlayer(nick)
+        shot = random.choice([True,False])
+        if shot:
+            player.addPoints(10)
+            
+
 

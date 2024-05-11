@@ -17,5 +17,12 @@ class Player:
     def resetPoints(self):
         self.points = startingPoints
 
+    def addPoints(self, points):
+        self.points += points
+
+    def removePoints(self, points):
+        self.points -= points
+
     def __str__(self):
         return f"{self.name} has {self.points} points."
+    
