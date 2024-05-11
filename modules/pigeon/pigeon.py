@@ -18,8 +18,8 @@ class Pigeon:
     
 
 pigeons = [
-    Pigeon("Cartel member", 10, 90),
-    Pigeon("Boss", 100, 35),
-    Pigeon("Precious", 50, 50)
+    Pigeon("cartel member", 10, 90),
+    Pigeon("boss", 100, 35),
+    Pigeon("precious", 50, 50)
 ]
  

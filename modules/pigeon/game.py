@@ -1,10 +1,16 @@
+import os
+
 from .actions import Action
+from .config import Config
 from .player import Player
 from .timer import RepeatedTimer
 from .pigeon import Pigeon, pigeons
 import random
+
+
 class Game:
     def __init__(self, irc):
+        self._config = Config(interval=os.environ.get("PIGEON_INTERVAL", 5))
         self.irc = irc
         self.players: [Player] = []
         self.actions: [Action] = [
@@ -57,7 +63,7 @@ class Game:
 
     def start(self):
         # do interval for every 5 seconds
-        RepeatedTimer(10, self.actOnPlayer)
+        RepeatedTimer(self._config.interval(), self.actOnPlayer)
 
     def attemptShoot(self, nick):
         if self.active == None:
@@ -67,7 +73,9 @@ class Game:
             print("Player not found")
             return "You are not a player in the game"
         print("Player found")
-        shot = random.random() < self.active.success() / 100
+        randomResult = random.random()
+        print("Random result: %s, success rate: %s" % (str(randomResult), str(self.active.success() / 100)))
+        shot = randomResult < self.active.success() / 100
         if shot:
             player.addPoints(self.active.points())
             self.active = None

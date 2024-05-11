@@ -1,3 +1,5 @@
+import os
+
 from pyircsdk import Module
 from .commands import Commands
 from .game import Game
@@ -6,6 +8,7 @@ from .game import Game
 class PigeonModule(Module):
     def __init__(self, irc):
         super().__init__(irc, "", "")
+        # get interval from environment variables
         self.game: Game = Game(irc)
         self.game.start()
         # listen to every message, check for joins to add players
