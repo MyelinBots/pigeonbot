@@ -11,24 +11,6 @@ class PigeonModule(Module):
         # listen to every message, check for joins to add players
 
     def handleCommand(self, message, command):
-        # add players on join
-        if message.command == "JOIN" and message.messageFrom != self.irc.config.nick:
-            print("adding player", message.messageFrom)
-            self.game.addPlayer(message.messageFrom)
-
-        # 353 is the response to the NAMES command
-        if message.command == "353":
-            print("adding players from NAMES")
-            print(message)
-            # get after 4th param
-            params = message.params[4:]
-            for name in params:
-                # remove @ and +
-                name = name.lstrip("@")
-                name = name.lstrip("+")
-
-                print("adding player", name)
-                self.game.addPlayer(name)
 
         # for each Commands call function
         commands = Commands(self.irc, self.game)
