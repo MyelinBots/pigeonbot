@@ -82,7 +82,7 @@ class Game:
             return "You hit the pigeon!"
         else:
             player.removePoints(10)
-            return "You missed the pigeon!"
+            return "You missed the pigeon! You are a murderer!!!"
 
     def scoreBoard(self):
         message = ""
