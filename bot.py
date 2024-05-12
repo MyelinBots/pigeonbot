@@ -7,7 +7,7 @@ host = os.getenv('HOST', 'irc.rizon.net')
 port = os.getenv('PORT', '6697')
 # convert port string to int
 port = int(port)
-ssl = os.getenv('SSL', 'True')
+ssl = os.getenv('SSL', 'False')
 nick = os.getenv('NICK', 'PigeonBot')
 channel = os.getenv('CHANNEL', '#toolbot')
 user = os.getenv('USER', 'PigeonBot')
