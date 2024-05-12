@@ -79,10 +79,10 @@ class Game:
         if shot:
             player.addPoints(self.active.points())
             self.active = None
-            return "You hit the pigeon!"
+            return "You hit the pigeon! You are a murderer!!!"
         else:
             player.removePoints(10)
-            return "You missed the pigeon! You are a murderer!!!"
+            return "You missed the pigeon! poor you! :D"
 
     def scoreBoard(self):
         message = ""
