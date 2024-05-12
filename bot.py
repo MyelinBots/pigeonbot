@@ -12,6 +12,9 @@ nick = os.getenv('NICK', 'PigeonBot')
 channel = os.getenv('CHANNEL', '#toolbot')
 user = os.getenv('USER', 'PigeonBot')
 realname = os.getenv('REALNAME', 'PigeonBot')
+nickservFormat = os.getenv('NICKSERV_FORMAT', 'nickserv :identify %s')
+nickservPassword = os.getenv('NICKSERV_PASSWORD', None)
+passw = os.getenv('PASS', None)
 
 irc = IRCSDK(IRCSDKConfig(
     host=host,
@@ -21,7 +24,10 @@ irc = IRCSDK(IRCSDKConfig(
     ssl=ssl == 'True',
     channel=channel,
     user=user,
-    realname=realname
+    realname=realname,
+    nickservFormat=nickservFormat,
+    nickservPassword=nickservPassword,
+    password=passw
 ))
 
 pigeonModule = PigeonModule(irc)
