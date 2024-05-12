@@ -29,7 +29,7 @@ irc = IRCSDK(IRCSDKConfig(
     nickservFormat=nickservFormat,
     nickservPassword=nickservPassword,
     password=passw,
-    nodataTimeout=nodataTimeout
+    nodataTimeout=int(nodataTimeout)
 ))
 
 pigeonModule = PigeonModule(irc)
