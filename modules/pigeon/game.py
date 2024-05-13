@@ -14,9 +14,9 @@ class Game:
         self.irc = irc
         self.players: [Player] = []
         self.actions: [Action] = [
-            Action("stole", ["tv", "wallet", "food"], "A %s pigeon %s your %s", 10),
-            Action("pooped", ["car", "table", "head"], "A %s pigeon %s on your %s", 10),
-            Action("landed", ["balcony", "head", "car", "house"], "A %s pigeon has %s on your %s", 10),
+            Action("stole", ["tv", "wallet", "food", "girlfriend/boyfriend", "phone", "ice cream", "laptop", "sandwich", "cookie", "headphones", "keyboard"], "A %s pigeon %s your %s", 10),
+            Action("pooped", ["car", "table", "head", "laptop", "bed", "shoes", "shirt", "phone", "couch", "carpet", "pants"], "A %s pigeon %s on your %s", 10),
+            Action("landed", ["balcony", "head", "car", "house", "swimming pool", "bed", "couch", "table"], "A %s pigeon has %s on your %s", 10),
         ]
         self.active: Pigeon = None
         self.pigeons: [Pigeon] = pigeons
@@ -49,7 +49,7 @@ class Game:
 
     def actOnPlayer(self) -> None:
         if self.active != None:
-            self.irc.privmsg(self.irc.config.channel, "The %s pigeon has made a clean escape" % self.active.type())
+            self.irc.privmsg(self.irc.config.channel, "coo coo ~ the %s pigeon has made a clean escape" % self.active.type())
             self.active = None
             return
         # if len(self.players) == 0:
@@ -67,7 +67,7 @@ class Game:
 
     def attemptShoot(self, nick):
         if self.active == None:
-            return "There is no pigeon, what are you shooting at?"
+            return "There is no pigeon, what are you shooting at? Creepy lol"
         player = self.findPlayer(nick)
         if player is None:
             print("Player not found")
