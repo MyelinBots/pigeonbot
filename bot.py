@@ -3,13 +3,13 @@ import os
 
 from modules.pigeon.main import PigeonModule
 
-host = os.getenv('HOST', 'irc.rizon.net')
+host = os.getenv('HOST', 'irc.myelinbots.com')
 port = os.getenv('PORT', '6697')
 # convert port string to int
 port = int(port)
 ssl = os.getenv('SSL', 'False')
 nick = os.getenv('NICK', 'PigeonBot')
-channel = os.getenv('CHANNEL', '#toolbot')
+channel = os.getenv('CHANNEL', '#test')
 user = os.getenv('USER', 'PigeonBot')
 realname = os.getenv('REALNAME', 'PigeonBot')
 nickservFormat = os.getenv('NICKSERV_FORMAT', 'nickserv :identify %s')

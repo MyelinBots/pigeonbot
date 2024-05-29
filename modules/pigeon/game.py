@@ -14,9 +14,10 @@ class Game:
         self.irc = irc
         self.players: [Player] = []
         self.actions: [Action] = [
-            Action("stole", ["tv", "wallet", "food", "girlfriend/boyfriend", "phone", "ice cream", "laptop", "sandwich", "cookie", "headphones", "keyboard"], "A %s pigeon %s your %s", 10),
+            Action("stole", ["tv", "wallet", "food", "girlfriend", "phone", "ice cream", "laptop", "sandwich", "cookie", "headphones", "keyboard"], "A %s pigeon %s your %s", 10),
             Action("pooped", ["car", "table", "head", "laptop", "bed", "shoes", "shirt", "phone", "couch", "carpet", "pants"], "A %s pigeon %s on your %s", 10),
             Action("landed", ["balcony", "head", "car", "house", "swimming pool", "bed", "couch", "table"], "A %s pigeon has %s on your %s", 10),
+            Action("mating" ["balcony", "car", "bed", "swimming pool", "couch", "table"], "%s pigeons are %s at your %s", 10),
         ]
         self.active: Pigeon = None
         self.pigeons: [Pigeon] = pigeons
@@ -52,6 +53,12 @@ class Game:
             self.irc.privmsg(self.irc.config.channel, "coo coo ~ the %s pigeon has made a clean escape" % self.active.type())
             self.active = None
             return
+        
+    def actOnPlayer(self) -> None:
+        if self.active != None:
+            self.irc.privmsg(self.irc.config.channel, "~ ~ ~ ~ ~ coo coo ~ ~ ~ ~ ~ pigeon is cooing ~")
+            self.active = None
+            return
         # if len(self.players) == 0:
         #     return
         # player = random.choice(self.players)
@@ -79,17 +86,23 @@ class Game:
         if shot:
             player.addPoints(self.active.points())
             self.active = None
-            return "You hit the pigeon! You are a murderer!!!"
-        else:
+            return "You hit the pigeon! you are a murderer!"
             player.removePoints(10)
             return "You missed the pigeon! poor you! :D"
+        
+        if shot:
+            player.addCounts(self.active.counts())
+            message += 1
+            print("Total pigeons shot: {pigeon_count}")
+        return message
 
     def scoreBoard(self):
         message = ""
         for player in self.players:
             message += player.name() + " " + str(player.points()) + " "
         return message
-
+    
+   
             
 
 
