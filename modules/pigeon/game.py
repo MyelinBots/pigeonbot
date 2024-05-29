@@ -17,7 +17,7 @@ class Game:
             Action("stole", ["tv", "wallet", "food", "girlfriend", "phone", "ice cream", "laptop", "sandwich", "cookie", "headphones", "keyboard"], "A %s pigeon %s your %s", 10),
             Action("pooped", ["car", "table", "head", "laptop", "bed", "shoes", "shirt", "phone", "couch", "carpet", "pants"], "A %s pigeon %s on your %s", 10),
             Action("landed", ["balcony", "head", "car", "house", "swimming pool", "bed", "couch", "table"], "A %s pigeon has %s on your %s", 10),
-            Action("mating" ["balcony", "car", "bed", "swimming pool", "couch", "table"], "%s pigeons are %s at your %s", 10),
+            Action("mating", ["balcony", "car", "bed", "swimming pool", "couch", "table"], "%s pigeons are %s at your %s", 10),
         ]
         self.active: Pigeon = None
         self.pigeons: [Pigeon] = pigeons
