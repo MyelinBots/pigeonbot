@@ -54,11 +54,6 @@ class Game:
             self.active = None
             return
         
-    def actOnPlayer(self) -> None:
-        if self.active != None:
-            self.irc.privmsg(self.irc.config.channel, "~ ~ ~ ~ ~ coo coo ~ ~ ~ ~ ~ pigeon is cooing ~")
-            self.active = None
-            return
         # if len(self.players) == 0:
         #     return
         # player = random.choice(self.players)
@@ -89,18 +84,33 @@ class Game:
             return "You hit the pigeon! you are a murderer!"
             player.removePoints(10)
             return "You missed the pigeon! poor you! :D"
-        
-        if shot:
-            player.addCounts(self.active.counts())
-            message += 1
-            print("Total pigeons shot: {pigeon_count}")
-        return message
 
     def scoreBoard(self):
         message = ""
         for player in self.players:
             message += player.name() + " " + str(player.points()) + " "
         return message
+    
+    def ___init__(self):
+        self.active = None
+        self.pigeon_count = 0 
+
+    def shoot(self, shot):
+        message = 0
+        if shot:
+            if self.active is not None:
+                player.addCounts(self.active.counts())
+                self.active = None
+                self.pigeon_count += 1
+                print(f"Total pigeons shot: {self.pigeon_count}")
+            message += 1
+        return message
+
+class Active:
+    def counts(self):
+        return 1 #assuming each active object counts as 1 pigeon shot
+    
+print(f"Player's total counts: {player.counts}")
     
    
             
