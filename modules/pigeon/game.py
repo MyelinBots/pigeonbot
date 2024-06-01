@@ -14,7 +14,7 @@ class Game:
         self.irc = irc
         self.players: [Player] = []
         self.actions: [Action] = [
-            Action("stole", ["tv", "wallet", "food", "girlfriend", "phone", "ice cream", "laptop", "sandwich", "cookie", "headphones", "keyboard"], "A %s pigeon %s your %s", 10),
+            Action("stole", ["tv", "wallet", "food", "girlfriend", "boyfriend", "phone", "ice cream", "laptop", "sandwich", "cookie", "headphones", "keyboard"], "A %s pigeon %s your %s", 10),
             Action("pooped", ["car", "table", "head", "laptop", "bed", "shoes", "shirt", "phone", "couch", "carpet", "pants"], "A %s pigeon %s on your %s", 10),
             Action("landed", ["balcony", "head", "car", "house", "swimming pool", "bed", "couch", "table"], "A %s pigeon has %s on your %s", 10),
             Action("mating", ["balcony", "car", "bed", "swimming pool", "couch", "table"], "%s pigeons are %s at your %s", 10),
@@ -92,21 +92,7 @@ class Game:
         for player in self.players:
             message += player.name() + " " + str(player.points()) + " "
         return message
-    
-    def ___init__(self):
-        self.active = None
-        self.pigeon_count = 0 
 
-    def shoot(self, shot):
-        message = 0
-        if shot:
-            if self.active is not None:
-                player.addCounts(self.active.counts())
-                self.active = None
-                self.pigeon_count += 1
-                print(f"Total pigeons shot: {self.pigeon_count}")
-            message += 1
-        return message
 
     
    
