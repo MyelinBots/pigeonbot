@@ -80,8 +80,10 @@ class Game:
         shot = randomResult < self.active.success() / 100
         if shot:
             player.addPoints(self.active.points())
+            player.addCount()
             self.active = None
-            return "You hit the pigeon! you are a murderer!"
+            return "You shot the pigeon! you are a murderer! You shot %s pigeon(s)!" % player.count()
+        else:
             player.removePoints(10)
             return "You missed the pigeon! poor you! :D"
 
@@ -106,11 +108,6 @@ class Game:
             message += 1
         return message
 
-class Active:
-    def counts(self):
-        return 1 #assuming each active object counts as 1 pigeon shot
-    
-print(f"Player's total counts: {player.counts}")
     
    
             

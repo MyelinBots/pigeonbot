@@ -4,6 +4,7 @@ class Player:
     def __init__(self, name: str):
         self._name = name
         self._points = startingPoints
+        self._count = 0
 
     def name(self):
         return self._name
@@ -25,6 +26,12 @@ class Player:
         if self._points < 0:
             self._points = 0
 
+    def count(self):
+        return self._count
+
     def __str__(self):
         return f"{self._name} has {self._points} points."
+    
+    def addCount(self):
+        self._count += 1
     
