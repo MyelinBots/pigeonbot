@@ -2,7 +2,7 @@ import random
 
 
 class Pigeon:
-    def __init__(self, type: str, points: int, success: int ):
+    def __init__(self, type: str, points: int, success: int):
         self._type = type
         self._points = points
         self._success = success
@@ -20,6 +20,6 @@ class Pigeon:
 pigeons = [
     Pigeon("cartel member", 10, 85),
     Pigeon("boss", 100, 25),
-    Pigeon("precious", 50, 50)
+    Pigeon("white", 50, 50),
 ]
  
