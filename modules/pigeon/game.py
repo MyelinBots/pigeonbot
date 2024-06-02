@@ -82,7 +82,7 @@ class Game:
             player.addPoints(self.active.points())
             player.addCount()
             self.active = None
-            return "You shot the pigeon! you are a murderer! You shot %s pigeon(s)!" % player.count()
+            return "You shot the pigeon! you are a murderer! you have shot a total of %s pigeon(s)!" % player.count()
         else:
             player.removePoints(10)
             return "You missed the pigeon! poor you! :D"
