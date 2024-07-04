@@ -15,7 +15,7 @@ realname = os.getenv('REALNAME', 'PigeonBot')
 nickservFormat = os.getenv('NICKSERV_FORMAT', 'nickserv :identify %s')
 nickservPassword = os.getenv('NICKSERV_PASSWORD', None)
 passw = os.getenv('PASS', None)
-nodataTimeout = os.getenv('NODATA_TIMEOUT', 120)
+nodataTimeout = os.getenv('NODATA_TIMEOUT', 12000)
 
 irc = IRCSDK(IRCSDKConfig(
     host=host,
