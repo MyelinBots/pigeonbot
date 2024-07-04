@@ -2,6 +2,8 @@ import os
 
 from .actions import Action
 from .config import Config
+from .db.db import DB
+from .db.player_repository import PlayerRepository
 from .player import Player
 from .timer import RepeatedTimer
 from .pigeon import Pigeon, pigeons
@@ -10,7 +12,7 @@ import random
 
 class Game:
     def __init__(self, irc):
-        self._config = Config(interval=os.environ.get("PIGEON_INTERVAL", 5))
+        self._config = Config(interval=os.environ.get("PIGEON_INTERVAL", 10))
         self.irc = irc
         self.players: [Player] = []
         self.actions: [Action] = [
@@ -21,13 +23,24 @@ class Game:
         ]
         self.active: Pigeon = None
         self.pigeons: [Pigeon] = pigeons
+        self.db = DB()
+        self.playerRepository = PlayerRepository(self.db)
+        self.syncPlayers()
 
+    def syncPlayers(self):
+        self.players = []
+        players = self.playerRepository.getAll()
+        for player in players:
+            if player is None:
+                continue
+            self.players.append(Player(player.name, player.score, player.count))
 
     def addPlayer(self, name: str) -> None:
         for player in self.players:
             if player.name == name:
                 return
-        self.players.append(Player(name))
+        self.players.append(Player(name, 0, 0))
+        self.playerRepository.upsert(name, 0, 0)
 
     def findPlayer(self, name: str):
         foundPlayer = None
@@ -37,6 +50,7 @@ class Game:
 
         if foundPlayer is None:
             self.addPlayer(name)
+            self.playerRepository.upsert(name, 0)
             return self.findPlayer(name)
 
         return foundPlayer
@@ -46,6 +60,7 @@ class Game:
         for player in self.players:
             if player.name == name:
                 self.players.remove(player)
+                self.playerRepository.delete(player.name())
                 return
 
     def actOnPlayer(self) -> None:
@@ -81,10 +96,12 @@ class Game:
         if shot:
             player.addPoints(self.active.points())
             player.addCount()
+            self.playerRepository.upsert(player.name(), player.points(), player.count())
             self.active = None
             return "You shot the pigeon! 🔫 you are a murderer! . . . . . you have shot a total of %s pigeon(s)! . . . . . 🐦 🕊️" % player.count()
         else:
             player.removePoints(10)
+            self.playerRepository.upsert(player.name(), player.points())
             return "~ You missed the pigeon! poor you! 😁 ~"
 
     def scoreBoard(self):
