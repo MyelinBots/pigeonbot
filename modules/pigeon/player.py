@@ -4,7 +4,7 @@ class Player:
     def __init__(self, name: str, startingPoints: int = startingPoints, startingCount: int = 0):
         self._name = name
         self._points = startingPoints
-        self._count = 0
+        self._count = startingCount
 
     def name(self) -> str:
         return self._name

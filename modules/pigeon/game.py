@@ -101,7 +101,7 @@ class Game:
             return "You shot the pigeon! 🔫 you are a murderer! . . . . . you have shot a total of %s pigeon(s)! . . . . . 🐦 🕊️" % player.count()
         else:
             player.removePoints(10)
-            self.playerRepository.upsert(player.name(), player.points())
+            self.playerRepository.upsert(player.name(), player.points(), player.count())
             return "~ You missed the pigeon! poor you! 😁 ~"
 
     def scoreBoard(self):
@@ -109,6 +109,11 @@ class Game:
         for player in self.players:
             message += player.name() + " " + str(player.points()) + " "
         return message
+    
+    def Pigeonsshot(self, playerName):
+        message = ""
+        player = self.findPlayer(playerName)
+        return  player.count()
 
 
     

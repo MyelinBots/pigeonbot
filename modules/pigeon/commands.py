@@ -20,3 +20,18 @@ class Commands:
             if command.command == self.fantasy + commandName:
                 self.irc.privmsg(self.irc.config.channel, "Scoreboard: %s" % self.game.scoreBoard())
         return
+    
+    def scorePigeon(self, message, command):
+        commandName = "pigeons"
+        if message.command == 'PRIVMSG':
+            if command.command == self.fantasy + commandName:
+                self.irc.privmsg(self.irc.config.channel, "Pigeons shot: %s" % self.game.Pigeonsshot(message.messageFrom.lower()))
+        return
+    
+    def bef(self, message, command):
+        commandName = "bef"
+        if message.command == 'PRIVMSG':
+            if command.command == self.fantasy + commandName:
+                self.irc.privmsg(self.irc.config.channel, "You cannot be friend with *rat of the sky*")
+        return
+
