@@ -109,6 +109,11 @@ class Game:
         for player in self.players:
             message += player.name() + " " + str(player.points()) + " "
         return message
+    
+    def Pigeonsshot(self, playerName):
+        message = ""
+        player = self.findPlayer(playerName)
+        return  player.count()
 
 
     
