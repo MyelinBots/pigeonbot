@@ -98,7 +98,7 @@ class Game:
             player.addCount()
             self.playerRepository.upsert(player.name(), player.points(), player.count())
             self.active = None
-            return "You shot the pigeon! 🔫 you are a murderer! . . . . . you have shot a total of %s pigeon(s)! . . . . . 🐦 🕊️" % player.count()
+            return "You shot the pigeon! 🔫 you are a murderer! . . . . . you have shot a total of %s pigeon(s)! . . .  🐦 🕊️ . . . you now have a total of %s points" % (player.count(), player.points())
         else:
             player.removePoints(10)
             self.playerRepository.upsert(player.name(), player.points(), player.count())
