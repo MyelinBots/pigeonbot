@@ -10,6 +10,7 @@ port = int(port)
 ssl = os.getenv('SSL', 'True')
 nick = os.getenv('NICK', 'PigeonBot')
 channel = os.getenv('CHANNEL', '#lobby')
+channels = os.getenv('CHANNELS', '#lobby').split(',')
 user = os.getenv('USER', 'PigeonBot')
 realname = os.getenv('REALNAME', 'PigeonBot')
 nickservFormat = os.getenv('NICKSERV_FORMAT', 'nickserv :identify %s')
@@ -24,6 +25,8 @@ irc = IRCSDK(IRCSDKConfig(
     # string false to boolean
     ssl=ssl == 'True',
     channel=channel,
+    # if no channels are provided, default to channel
+    channels=channels if channels[0] != '' else [channel],
     user=user,
     realname=realname,
     nickservFormat=nickservFormat,
