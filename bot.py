@@ -26,7 +26,7 @@ irc = IRCSDK(IRCSDKConfig(
     ssl=ssl == 'True',
     channel=channel,
     # if no channels are provided, default to channel
-    channels=channels if channels[0] != '' else [channel],
+    channels=channels,
     user=user,
     realname=realname,
     nickservFormat=nickservFormat,
